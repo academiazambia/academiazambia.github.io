@@ -1,0 +1,14 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Academia-Zambia Admin Login</title>
+<style>body{margin:0;font-family:Arial;background:#f3f7fa;display:grid;place-items:center;min-height:100vh}.box{background:white;padding:32px;border-radius:16px;box-shadow:0 10px 35px #12345b22;width:min(420px,90%)}img{width:90px;display:block;margin:auto}h1{text-align:center;color:#12345b}label{font-weight:bold;font-size:13px;display:block;margin:14px 0 6px}input{width:100%;padding:12px;border:1px solid #ccd7e0;border-radius:8px;box-sizing:border-box}button{width:100%;padding:13px;border:0;border-radius:8px;background:#12345b;color:#fff;font-weight:bold;margin-top:18px}#msg{margin-top:14px;color:#b3261e;text-align:center}</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script></head>
+<body><div class="box"><img src="assets/logo.jpeg"><h1>Admin Login</h1><p style="text-align:center">Academia-Zambia</p>
+<label>Email</label><input id="email" type="email" value="malamboadonis0@gmail.com">
+<label>Password</label><input id="password" type="password" placeholder="Your admin password">
+<button onclick="login()">Sign in</button><div id="msg"></div></div>
+<script>
+const cfg=window.AZ_CONFIG;
+if(cfg.SUPABASE_URL.includes('PASTE_')) document.getElementById('msg').textContent='Add your Supabase settings to config.js first.';
+const client=supabase.createClient(cfg.SUPABASE_URL,cfg.SUPABASE_PUBLISHABLE_KEY);
+async function login(){const {error}=await client.auth.signInWithPassword({email:email.value,password:password.value});if(error)msg.textContent=error.message;else location.href='admin.html';}
+</script></body></html>
